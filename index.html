@@ -1,0 +1,44 @@
+<html ng-app="myNinjaApp">
+    <head><title> Angular </title>
+    <script src= "lib\angular.min.js" type="text/javascript"></script>
+    <script src="lib\angular-route.min.js"></script>
+    <script src="lib\angular-animate.min.js"></script>
+    <script src="app.js"></script>
+    <link href="css\styles.css" rel="stylesheet" type="text/css" />
+</head>
+
+    <body>
+        <header ng-include="'header.html'"></header>
+        <main ng-view></main>
+<div ng-controller="NinjaController" class="content">
+        <button ng-click="order='name'">Order by name</button>
+        <button ng-click="order='belt'">Order by belt</button>
+            <input type="text" placeholder="Search for a ninja" ng-model="search"/>
+        <ul>
+            <li ng-repeat="ninja in ninjas | orderBy: order | filter: search" ng-show="ninja.available">
+                <h2>{{ninja.name}} - {{ninja.rate | currency: '$'}}</h2>
+                <div class="belt" style="background: {{ninja.belt}}">{{ninja.belt}} belt</div>
+                <div ng-click="removeNinja(ninja)">x</div>
+            </li>
+        </ul>
+        
+        <form ng-submit="addNinja()">
+        <input type="text" placeholder="name" ng-model="newninja.name"/>
+        <input type="text" placeholder="belt" ng-model="newninja.belt"/>
+        <input type="text" placeholder="rate" ng-model="newninja.rate"/>
+        <input type="submit" value="Add new ninja"/>
+        
+        </form>
+    </div>
+        <form name="contactForm" ng-submit="sendMessage()" novalidate>
+            <input type="text" placeholder="name" name="name" ng-model="contact.name" ng-required="true"></input>
+            <input type="email" placeholder="Email" name="email" ng-model="contact.email" ng-required="true"></input>
+            <textarea placeholder="Your message" name="message" ng-required="true"></textarea>
+            <input type="submit" value="Send"></input>
+        </form>
+
+         <random-ninja ninjas="ninjas" title="'ddf'"><h1>Div ng he</h1></random-ninja> 
+
+    </body>
+
+</html>
